@@ -115,7 +115,7 @@
 		
 	<table class='table table-bordered table-condensed text-center' cellSpacing='0' cellPadding='0' unselectable='on' onSelectStart='return false;'
 	 onMouseDown='return false;'>
-		<thead class='badge-pill badge-success'>
+		<tbody class='badge-pill badge-success'>
 			<tr>
 				<td><button type='button' class='btn btn-sm btn-success btn-block' onClick='chgMth(0,100);' title='-100 Tahun'>-100Th</button></td>
     <td><button type='button' class='btn btn-sm btn-success btn-block' onClick='chgMth(0,10);' title='-10 Tahun'>-10Th</button></td>
@@ -129,13 +129,13 @@
     <td colspan="3"><button type='button' class='btn btn-sm btn-success btn-block' onClick='chgMth(1,0);' title='-1 Bulan'><i class='far fa-arrow-alt-circle-left'></i> <span id='prev'></span></button></td>
     <td colspan="3"><button type='button' class='btn btn-sm btn-success btn-block' onClick='chgMth(3,0);' title='+1 Bulan'><span id='next'></span> <i class='far fa-arrow-alt-circle-right'></i></button></td>
   </tr>
-		</thead></table>
+		</tbody></table>
 
  <table class='table table-bordered table-condensed text-center' cellSpacing='0' cellPadding='0' unselectable='on' onSelectStart='return false;' onMouseDown='return false;'>
 
    <thead class='table badge-pill badge-primary'>
-   <tr >
-   <td class='h1 font-weight-bold' colSpan='7' id='mTyR'/>
+   <tr>
+   <td class='h1 font-weight-bold' colSpan='7' id='mTyR'></td>
    </tr>
   </thead>
   <thead>
@@ -208,14 +208,15 @@
     
   </tbody>
  </table>
+</div>
+</div>
+</div>
  <div class='invisible card-sm bg-success text-white'>
      <div class='card-body'>
         <i><font id='showDay'></font> <font id='showDate'></font></i> 
     </div>
 	</div>
-</div>
-</div>
-</div>
+
   
   <!-- Scripts -->
   <script type="text/javascript" src="https://mj18635zx8.codesandbox.io/index.js"></script>
