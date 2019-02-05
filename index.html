@@ -5,7 +5,7 @@
 
 	<!--  Meta  -->
 	<meta charset="UTF-8" />
-	<title>Kalender Jawa Hijriah</title>
+	<title>Kalender Jawa</title>
 
 	<!--  Styles  -->
 	<meta charset="utf-8">
@@ -109,9 +109,10 @@
 	</style>
 
 
-<div class="container">
-<div class="row">		
-	<table class='table table-bordered table-condensed text-center' cellSpacing='0' cellPadding='0' unselectable='on' onSelectStart='return false;'
+
+
+<center>
+	<table class='table-bordered table-condensed text-center' cellSpacing='0' cellPadding='0' unselectable='on' onSelectStart='return false;'
 	 onMouseDown='return false;'>
 		<tbody class='badge-pill badge-success'>
 			<tr>
@@ -127,14 +128,13 @@
     <td colspan="3"><button type='button' class='btn btn-sm btn-success btn-block' onClick='chgMth(1,0);' title='-1 Bulan'><i class='far fa-arrow-alt-circle-left'></i> <span id='prev'></span></button></td>
     <td colspan="3"><button type='button' class='btn btn-sm btn-success btn-block' onClick='chgMth(3,0);' title='+1 Bulan'><span id='next'></span> <i class='far fa-arrow-alt-circle-right'></i></button></td>
   </tr>
-		</tbody></table>
-	</div>
-<div class="row">
- <table class='table table-bordered table-condensed text-center' cellSpacing='0' cellPadding='0' unselectable='on' onSelectStart='return false;' onMouseDown='return false;'>
+</tbody></table>
+
+ <table class='table-bordered table-condensed text-center' cellSpacing='0' cellPadding='0' unselectable='on' onSelectStart='return false;' onMouseDown='return false;'>
 
    <thead class='table badge-pill badge-primary'>
-   <tr>
-   <td class='h1 font-weight-bold' colSpan='7' id='mTyR'></td>
+   <tr >
+   <td class='h1 font-weight-bold' colSpan='7' id='mTyR'/>
    </tr>
   </thead>
   <thead>
@@ -207,15 +207,14 @@
     
   </tbody>
  </table>
-</div>
  <div class='invisible card-sm bg-success text-white'>
      <div class='card-body'>
         <i><font id='showDay'></font> <font id='showDate'></font></i> 
     </div>
-	</div>
-</div>
+    </div>
+</center>
   
   <!-- Scripts -->
-  <script type="text/javascript" src="https://mj18635zx8.codesandbox.io/index.js"></script>
+  <script src="https://mj18635zx8.codesandbox.io/index.js"></script>
 </body>
 </html>
