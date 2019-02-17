@@ -113,13 +113,13 @@ $(document).ready(function() {
           e = "";
         switch (!0) {
           case 0 < k && 0 === h:
-            f = "template/clean/downloads.php?audio=true";
+            f = "https://dl.lanboseo.com/template/clean/downloads.php?audio=true";
             break;
           case 0 < k && 0 < h:
-            f = "template/clean/downloads.php?video=true&audio=true";
+            f = "https://dl.lanboseo.com/template/clean/downloads.php?video=true&audio=true";
             break;
           default:
-            f = "template/clean/downloads.php?video=true";
+            f = "https://dl.lanboseo.com/template/clean/downloads.php?video=true";
         }
         !1 === jQuery.isEmptyObject(localStorage.getItem(f))
           ? (e = localStorage.getItem(f))
@@ -156,7 +156,7 @@ $(document).ready(function() {
       t(a, b);
     }
     function t(a, b) {
-      $.post("system/action.php", { url: a, token: b }, function(b) {
+      $.post("https://dl.lanboseo.com/system/action.php", { url: a, token: b }, function(b) {
         "error" !== b &&
           ((b.timestamp = new Date()),
           localStorage.setItem(a, JSON.stringify(b)));
@@ -171,7 +171,7 @@ $(document).ready(function() {
         "K0w8rlDCB6zBB739TGt1BLY2n",
         "3dk9oqc7CQoI90fCyk9JcZEvS88bvkP1YHxI3ylyorl1cNaD5H"
       );
-      g.setProxy(w() + "/assets/js/codebird-cors-proxy/");
+      g.setProxy(w() + "https://dl.lanboseo.com/assets/js/codebird-cors-proxy/");
       var h = k.split("/")[5];
       -1 === k.indexOf("twitter.com") || void 0 === h
         ? r()
@@ -221,7 +221,7 @@ $(document).ready(function() {
     }
     function r() {
       $(".fa-spinner").remove();
-      $.get("template/clean/error.php", function(a) {
+      $.get("https://dl.lanboseo.com/template/clean/error.php", function(a) {
         $("#alert").html(a);
         document.getElementById("alert").scrollIntoView();
       });
