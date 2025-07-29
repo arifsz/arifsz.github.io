@@ -31,7 +31,7 @@ function fetchHolidays(year, month) {
     .then(data => {
       let holidayText = "";
       // Filter hanya yang bukan cuti bersama
-      let nationalHolidays = data.filter(holiday => holiday.is_national_holiday);
+      //let nationalHolidays = data.filter(holiday => holiday.is_national_holiday);
       
       if (nationalHolidays.length > 0) {
         nationalHolidays.forEach(holiday => {
