@@ -31,7 +31,7 @@ function fetchHolidays(year, month) {
     .then(data => {
       let holidayText = "";
       // Filter hanya yang bukan cuti bersama
-      //let nationalHolidays = data.filter(holiday => holiday.is_national_holiday);
+      let nationalHolidays = data.filter(holiday => holiday.is_national_holiday);
       
       if (nationalHolidays.length > 0) {
         nationalHolidays.forEach(holiday => {
@@ -107,7 +107,7 @@ function chgMth(i, y) {
     pS = ((new Date(yR, mT, aD).getTime() - new Date(100, 0, 1).getTime()) / (24 * 60 * 60 * 1000)) % 5;
     document.getElementById("iD" + bD).innerHTML = "<font style='font-size:26px;'>" + aD + "</font><br>" + pN[Math.floor(pS)];
     if ((aD == dT.getDate()) & (mT == dT.getMonth()) & (yR == dT.getFullYear())) {
-      document.getElementById("iD" + bD).style.backgroundColor = "yellow";
+      document.getElementById("iD" + bD).style.backgroundColor = "green";
     }
     bD++;
   }
