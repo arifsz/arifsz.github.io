@@ -17,38 +17,40 @@ var mNN = [
   "Desember",
   "Januari"
 ];
-var Lb1 = [
-  "1 Januari Tahun Baru Masehi",
-  "5 Februari Tahun Baru Imlek",
-  "7 Maret Hari Raya Nyepi",
-  "03 April Isra Miraj",
-  "01 Mei Hari Buruh",
-  "01 Juni Hari Lahir Pancasila",
-  "",
-  "11 Agustus Idul Adha",
-  "01 September Tahun Baru Hijriyah",
-  "",
-  "09 November Maulid Nabi",
-  "24 Desember Cuti Bersama"
-];
-var Lb2 = [
-  "",
-  "",
-  "",
-  "19 April Jumat Agung",
-  "19 Mei Hari Raya Waisak",
-  "03 - 04 Juni Cuti Bersama",
-  "",
-  "17 Agustus Hari Kemerdekaan",
-  "",
-  "",
-  "",
-  "25 Desember Hari Natal"
-];
-var Lb3 = ["", "", "", "", "30 Mei Kenaikan Isa Almasih", "05 - 06 Juni Idul Fitri", "", "", "", "", "", ""];
-var Lb4 = ["", "", "", "", "", "07 Juni Cuti Bersama", "", "", "", "", "", ""];
+
+// Variabel Lb1, Lb2, Lb3, Lb4 dihapus dan akan digantikan dengan fungsi fetchHolidays
+
 chgMth(2, 0);
 chgClk();
+
+// Fungsi baru untuk mengambil data hari libur
+function fetchHolidays(year, month) {
+  // bulan di API dimulai dari 1, jadi kita tambah 1
+  fetch(`https://api-harilibur.vercel.app/api?year=${year}&month=${month + 1}`)
+    .then(response => response.json())
+    .then(data => {
+      let holidayText = "";
+      // Filter hanya yang bukan cuti bersama
+      let nationalHolidays = data.filter(holiday => holiday.is_national_holiday);
+      
+      if (nationalHolidays.length > 0) {
+        nationalHolidays.forEach(holiday => {
+          // Ekstrak tanggal dari format YYYY-MM-DD
+          let holidayDate = new Date(holiday.holiday_date + 'T00:00:00');
+          holidayText += `<font class='h6 font-weight-bold'>${holidayDate.getDate()}: ${holiday.holiday_name}</font><br>`;
+        });
+      } else {
+        holidayText = "<font class='h6 font-weight-bold'>Tidak ada hari libur nasional di bulan ini.</font>";
+      }
+      Lbr.innerHTML = holidayText;
+      thN.innerHTML = year;
+    })
+    .catch(error => {
+      console.error('Error fetching holidays:', error);
+      Lbr.innerHTML = "<font class='h6 font-weight-bold text-danger'>Gagal memuat data hari libur.</font>";
+    });
+}
+
 
 function chgMth(i, y) {
   dT = new Date();
@@ -113,8 +115,9 @@ function chgMth(i, y) {
   next.innerHTML = "<font>" + mNN[mT + 2] + " " + "</font>";
   prev.innerHTML = "<font>" + mNN[mT] + " " + "</font>";
 
-  thN.innerHTML = dT.getFullYear();
-  Lbr.innerHTML = "<font class='h6 font-weight-bold'>" + Lb1[mT] + "<br>" + Lb2[mT] + "<br>" + Lb3[mT] + "<br>" + Lb4[mT] + "</font>";
+  // Panggil fungsi fetchHolidays setiap kali bulan/tahun diubah
+  fetchHolidays(yR, mT);
+
   for (vD = 1; bD <= 41; vD++) {
     document.getElementById("iD" + bD).innerHTML = "<font style='font-size:20px;color:gray;'>" + vD + "</font>";
     bD++;
