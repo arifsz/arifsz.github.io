@@ -13,7 +13,7 @@ chgMth(2, 0);
 chgClk();
 
 /**
- * Mengambil data hari libur dari API.
+ * Mengambil data hari libur dari API, memperbaiki parsing tanggal, dan memformat ulang tampilan.
  * @param {number} year - Tahun.
  * @param {number} month - Bulan (0-11).
  * @param {function} callback - Fungsi yang akan dipanggil setelah data diterima.
@@ -29,20 +29,33 @@ function fetchHolidays(year, month, callback) {
 
       if (nationalHolidays.length > 0) {
         nationalHolidays.forEach(holiday => {
-          let holidayDate = new Date(holiday.holiday_date + 'T00:00:00');
-          holidaysOfMonth.push(holidayDate.getDate()); // Simpan tanggalnya saja
-          holidayText += `<font class='h6 font-weight-bold'>${holidayDate.getDate()}: ${holiday.holiday_name}</font><br>`;
+          // **PERBAIKAN**: Parsing tanggal secara manual untuk menghindari NaN
+          const dateParts = holiday.holiday_date.split('-');
+          const holidayDate = new Date(dateParts[0], dateParts[1] - 1, dateParts[2]);
+
+          if (!isNaN(holidayDate)) { // Pastikan tanggal valid setelah parsing
+              const day = holidayDate.getDate();
+              const monthAbbr = mN[holidayDate.getMonth()].substr(0, 3); // Ambil 3 huruf singkatan bulan
+              
+              holidaysOfMonth.push(day); // Simpan tanggalnya untuk penandaan di kalender
+
+              // **PEMBARUAN FORMAT**: Ubah format tampilan dan perkecil font
+              holidayText += `<font style="font-size: 13px; font-weight: bold;">${day} ${monthAbbr}: ${holiday.holiday_name}</font><br>`;
+          }
         });
-      } else {
-        holidayText = "<font class='h6 font-weight-bold'>Tidak ada hari libur nasional di bulan ini.</font>";
       }
+      
+      if(holidayText === "") {
+        holidayText = "<font style='font-size: 13px; font-weight: bold;'>Tidak ada hari libur nasional di bulan ini.</font>";
+      }
+
       Lbr.innerHTML = holidayText;
       thN.innerHTML = year;
       callback(); // Jalankan fungsi callback untuk menggambar ulang kalender
     })
     .catch(error => {
       console.error('Error fetching holidays:', error);
-      Lbr.innerHTML = "<font class='h6 font-weight-bold text-danger'>Gagal memuat data hari libur.</font>";
+      Lbr.innerHTML = "<font style='font-size: 13px; font-weight: bold;' class='text-danger'>Gagal memuat data hari libur.</font>";
       holidaysOfMonth = [];
       callback(); // Tetap gambar kalender meskipun pengambilan data gagal
     });
@@ -106,7 +119,7 @@ function drawCalendar() {
       currentCell.style.color = "red";
     }
     
-    // Tandai hari libur (teks merah dan tebal)
+    // Tandai hari libur (teks merah dan tebal), menimpa aturan hari Minggu jika perlu
     if (isHoliday) {
       currentCell.style.color = "red";
       currentCell.style.fontWeight = "bold";
